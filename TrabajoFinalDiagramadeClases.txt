@@ -1,0 +1,21 @@
+// Diagrama de Clases Trabajo Final
+// ------------------
+
+// Relaciones
+[Juego]++1->1[Personajes],
+[Juego]++1->1[Laberintos],
+[Juego]1++->1[ArregloCorrupts],
+[Juego]1++->1[ArregloAsesinos],
+[Juego]++1->1[Portales],
+[Juego]1++->1[ArregloAliados],
+[Personajes]^-[PersonajePrincipal],
+[Personajes]^-[Asesino],
+[Personajes]^-[Aliados],
+[Personajes]^-[Corrupts],
+[Personajes]-.->1[Laberintos],
+[PersonajePrincipal]-.->0.*[Portales],
+[PersonajePrincipal]-.->0.*[Asesino],[PersonajePrincipal]-.->0.*[Corrupts],
+[PersonajePrincipal]-.->0.*[Aliados]
+[ArregloAsesinos]++->0.*[Asesino],
+[ArregloAliados]++->0.*[Aliados],
+[ArregloCorrupts]++->0.*[Corrupts],
