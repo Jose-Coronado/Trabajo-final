@@ -29,7 +29,7 @@ public:
 				if (Matriz[i][j] == 1)
 					g->FillRectangle(Brushes::Black, (j * anchocelda)/2, i * altocelda, anchocelda, altocelda);
 				else
-				g->FillRectangle(Brushes::White, (j * anchocelda)/2, i * altocelda, anchocelda, altocelda);
+				g->FillRectangle(Brushes::Yellow, (j * anchocelda)/2, i * altocelda, anchocelda, altocelda);//de amarillo se ve chevere, atte david
 				
 
 
