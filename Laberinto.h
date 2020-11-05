@@ -13,7 +13,7 @@ public:
 	};
 	~Laberinto() {};
 	
-	void Graficar(Graphics^ g,int anchocelda,int altocelda)
+	void Graficar(Graphics^ g,int anchocelda,int altocelda, Bitmap^ img)
 	{
 		int Matriz[F][C] = {
 		{ 0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0},
@@ -27,12 +27,12 @@ public:
 			{
 			
 				if (Matriz[i][j] == 1)
-					g->FillRectangle(Brushes::Black, (j * anchocelda)/2, i * altocelda, anchocelda, altocelda);
+					g->DrawImage(img, (j * anchocelda) / 2, i * altocelda, anchocelda, altocelda);//agregue imagen atte david
 				else
-				g->FillRectangle(Brushes::Yellow, (j * anchocelda)/2, i * altocelda, anchocelda, altocelda);//de amarillo se ve chevere, atte david
+				g->FillRectangle(Brushes::Maroon, (j * anchocelda)/2, i * altocelda, anchocelda, altocelda);
 				
 
-
+				
 				
 			}
 
