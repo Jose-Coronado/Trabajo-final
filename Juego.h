@@ -9,13 +9,14 @@ private:
 	Jugador* jugador;
 
 	Laberinto* laberinto ;
-
+	Bitmap^ imgLaberinto;
 	Bitmap^ imgJugador;
 public:
 	ControladorJuego()
 	{
 	 
 		imgJugador = gcnew Bitmap("Imagenes\\personaje.png");
+		imgLaberinto = gcnew Bitmap("Imagenes\\laberinto1.png");
 
 		jugador = new Jugador(imgJugador);
 	 
@@ -76,7 +77,7 @@ public:
 	{
 		int anchocelda = jugador->GetAncho();
 		int altocelda = jugador->GetAlto();
-		laberinto->Graficar(g,anchocelda,altocelda);
+		laberinto->Graficar(g,anchocelda,altocelda,imgLaberinto);//imagen agregada
 		jugador->Mostrar(g, imgJugador);
 	}
 	
