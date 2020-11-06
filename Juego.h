@@ -17,8 +17,10 @@ public:
 	 
 		imgJugador = gcnew Bitmap("Imagenes\\personaje.png");
 		imgLaberinto = gcnew Bitmap("Imagenes\\laberinto1.png");
+		imgCorrupto = gcnew Bitmap("Imagenes\\corruptos.png")
 
 		jugador = new Jugador(imgJugador);
+		// Se debe añadir a los corruptos como un arreglo no? Revisar Template.h
 	 
 	}
 	~ControladorJuego()
