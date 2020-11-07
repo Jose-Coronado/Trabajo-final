@@ -21,6 +21,7 @@ public:
 
 		jugador = new Jugador(imgJugador);
 		// Se debe añadir a los corruptos como un arreglo no? Revisar Template.h
+		//si, tambien a los asesinos
 	 
 	}
 	~ControladorJuego()
