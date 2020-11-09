@@ -1,28 +1,31 @@
 #pragma once
 #include "Jugador.h"
 #include "Laberinto.h"
- 
+#include "Corrupto.h"
+
 
 ref class ControladorJuego
 {
 private:
 	Jugador* jugador;
-
-	Laberinto* laberinto ;
+	Corrupto* corrupto;
+	Laberinto* laberinto;
 	Bitmap^ imgLaberinto;
+	Bitmap^ imgCorrupto;
 	Bitmap^ imgJugador;
 public:
 	ControladorJuego()
 	{
-	 
+
 		imgJugador = gcnew Bitmap("Imagenes\\personaje.png");
 		imgLaberinto = gcnew Bitmap("Imagenes\\laberinto1.png");
-		imgCorrupto = gcnew Bitmap("Imagenes\\corruptos.png")
+		imgCorrupto = gcnew Bitmap("Imagenes\\corrupto.png");
 
 		jugador = new Jugador(imgJugador);
+		corrupto = new Corrupto(imgCorrupto);
 		// Se debe añadir a los corruptos como un arreglo no? Revisar Template.h
 		//si, tambien a los asesinos y aliados
-	 
+
 	}
 	~ControladorJuego()
 	{
@@ -68,20 +71,25 @@ public:
 				jugador->SetDX(0);
 		}
 	}
-
+	void Persecucion()
+	{
+		corrupto->perseguir(jugador);
+	}
 	void Mover(Graphics^ g)
 	{
-		
-			jugador->Mover(g);
 
+		jugador->Mover(g);
 		
+
 	}
 	void Mostrar(Graphics^ g)
 	{
 		int anchocelda = jugador->GetAncho();
 		int altocelda = jugador->GetAlto();
-		laberinto->Graficar(g,anchocelda,altocelda,imgLaberinto);//imagen agregada
+	
+		laberinto->Graficar(g, anchocelda, altocelda, imgLaberinto);//imagen agregada
+		corrupto->Mostrar(g, imgCorrupto);
 		jugador->Mostrar(g, imgJugador);
 	}
-	
+
 };
