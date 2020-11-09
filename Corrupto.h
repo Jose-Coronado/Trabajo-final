@@ -1,31 +1,32 @@
 #pragma once
-#include "Personajes.h"
+#include "Entidad.h"
 #include "laberinto.h"
+#include "Jugador.h"
 
 //Los sprites del corrupto solo tienen movimiento hacia la derecha :'v
 
 enum SpriteCorrupto
 {
-	CaminarIzquierda,
-	CaminarDerecha,
-	CaminarAbajo,
-	CaminarArriba,
+	Abajo,
+	Izquierda,
+	Derecha,
+	Arriba,
 };
 
-class Corrupto : public Personajes
+class Corrupto : public Entidad
 {
 private:
 	SpriteCorrupto accion;
 public:
 	Corrupto(Bitmap^ img)
 	{
-		x = 8; y = 8;
+		x = 300; y = 300;
 		dx = dy = 0;
 
-		ancho = img->Width / 7;
+		ancho = img->Width / 4;
 		alto = img->Height / 4;
 
-		accion = CaminarDerecha;
+		accion = Derecha;
 	}
 
 	void SetAccion(SpriteCorrupto value)
@@ -33,21 +34,34 @@ public:
 		accion = value;
 	}
 
-	void Mover(Graphics^ g)
-	{
-		if (x + dx >= 0 && x + ancho + dx < g->VisibleClipBounds.Width)
-			x += dx;
-		if (y + dy >= 0 && y + alto + dy < g->VisibleClipBounds.Height)
-			y += dy;
+	void perseguir(Jugador* jugador) {
+		/*Random^ r = gcnew Random;
+		short confusion = r->Next(1, 10) > 2 ? 1 : -1;*/
 
+		Point corrupto_xy = this->get_ubicacion();
+		Point jugador_xy = jugador->get_ubicacion();
+		if (jugador_xy.X - corrupto_xy.X < 0) {
+			x -= 2;/** confusion;*/
+			SetAccion(Izquierda);
+		}
+		else if (jugador_xy.X - corrupto_xy.X > 0) {
+			x += 2;
+			SetAccion(Derecha);
+		}
+		if (jugador_xy.Y - corrupto_xy.Y < 0) {
+			y -= 2;
+			SetAccion(Arriba);
+		}
+		else if (jugador_xy.Y - corrupto_xy.Y > 0) {
+			y += 2;
+			SetAccion(Abajo);
+		}
+		
 	}
-	void Mostrar(Graphics^ g, Bitmap^ img)
-	{
+	void Mostrar(Graphics^ g, Bitmap^ img)  {
 		Rectangle corte = Rectangle(IDx * ancho, accion * alto, ancho, alto);
 		g->DrawImage(img, Area(), corte, GraphicsUnit::Pixel);
-
-		if (dx != 0 || dy != 0) {
-			IDx = (IDx + 1) % 4;
-		}
+		++this->IDx %= 4;
 	}
+
 };
