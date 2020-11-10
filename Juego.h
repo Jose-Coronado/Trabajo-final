@@ -2,14 +2,17 @@
 #include "Jugador.h"
 #include "Laberinto.h"
 #include "Corrupto.h"
+#include "Aliado.h"
 
 
 ref class ControladorJuego
 {
 private:
+	Aliado* aliado;
 	Jugador* jugador;
 	Corrupto* corrupto;
 	Laberinto* laberinto;
+	Bitmap^ imgAliado;
 	Bitmap^ imgLaberinto;
 	Bitmap^ imgCorrupto;
 	Bitmap^ imgJugador;
@@ -20,8 +23,10 @@ public:
 		imgJugador = gcnew Bitmap("Imagenes\\personaje.png");
 		imgLaberinto = gcnew Bitmap("Imagenes\\laberinto1.png");
 		imgCorrupto = gcnew Bitmap("Imagenes\\corrupto.png");
+		imgAliado = gcnew Bitmap("Imagenes\\aliado.png");
 
 		jugador = new Jugador(imgJugador);
+		aliado = new Aliado(imgAliado);
 		corrupto = new Corrupto(imgCorrupto);
 		// Se debe añadir a los corruptos como un arreglo no? Revisar Template.h
 		//si, tambien a los asesinos y aliados
@@ -71,15 +76,16 @@ public:
 				jugador->SetDX(0);
 		}
 	}
-	void Persecucion()
+	void PersecucionAliado()
 	{
-		corrupto->perseguir(jugador);
+		
+		aliado->perseguir(jugador);
 	}
 	void Mover(Graphics^ g)
 	{
 
 		jugador->Mover(g);
-		
+		corrupto->perseguir(jugador);
 
 	}
 	void Mostrar(Graphics^ g)
@@ -88,6 +94,7 @@ public:
 		int altocelda = jugador->GetAlto();
 	
 		laberinto->Graficar(g, anchocelda, altocelda, imgLaberinto);//imagen agregada
+		aliado->Mostrar(g, imgAliado);
 		corrupto->Mostrar(g, imgCorrupto);
 		jugador->Mostrar(g, imgJugador);
 	}
