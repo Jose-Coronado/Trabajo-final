@@ -78,6 +78,7 @@ namespace Juego
 		   Void MyForm_KeyDown(Object^ sender, KeyEventArgs^ e)
 		   {
 			   juego->MovimientoJugador(true, e->KeyCode);
+			   juego->PersecucionAliado();
 		   }
 		   Void MyForm_KeyUp(Object^ sender, KeyEventArgs^ e)
 		   {
