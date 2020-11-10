@@ -1,5 +1,5 @@
 #pragma once
-#include "Entidad.h"
+#include "Personajes.h"
 #include "laberinto.h"
 #include "Jugador.h"
 
